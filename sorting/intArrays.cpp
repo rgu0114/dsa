@@ -62,3 +62,24 @@ static void selectionSort(vector<int> &b) {
     j++;
   }
 }
+
+/** Precondition: b[h..k-1] is sorted, and b[k] contains a value.<br>
+    Sort b[h..k] */
+static void insertValue(vector<int> &b, int h, int k) {
+  while (h < k && b[k] > b[k - 1]) {
+    // swap b[k] and b[k - 1]. if k - 1 = h, this swap would guarantee sorted order
+    int temp = b[k - 1];
+    b[k - 1] = b[k];
+    b[k] = temp;
+    k--;
+  }
+}
+
+/** Sort b[h..k] --put its elements in ascending order. */
+static void insertionSort(vector<int> &b, int h, int k) {
+  int i = h;
+  while (i <= k) {
+    insertValue(b, h, i);
+    i++;
+  }
+}
