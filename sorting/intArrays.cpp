@@ -178,3 +178,41 @@ static void mergeSort(vector<int> &b, int h, int k) {
   mergeSort(b, med + 1, k);
   merge(b, h, med, k);
 }
+
+
+/** Swap the values of b so that the negative ones are
+      first, then the 0's, and finally the positive ones.
+      In the original problem, the negative values are red
+      balls, 0's are white balls, positive values are blue balls*/
+static void DutchNationalFlag(vector<int> &b) {
+  //        0------------------------------------ b.length
+  // pre: b|              ?                      |
+  //        -------------------------------------
+  // 
+  //        0------------------------------------ b.length
+  // post:b|   <0    |    = 0     |    >0        |
+  //        -------------------------------------
+  int h = 0;
+  int k = 0;
+  int t = b.length-1
+  //        0-------h-------k------t------------- b.length
+  // inv :b|  <0   |  = 0  |   ?    |    >0      |
+  //        -------------------------------------
+
+  while (k < t + 1) {
+    if (b[k] < 0) {
+      int temp = b[h];
+      b[h] = b[k];
+      b[k] = temp;
+      h++;
+      k++;
+    } else if (b[k] == 0) {
+      k++;
+    } else {
+      int temp = b[t];
+      b[t] = b[k];
+      b[k] = temp;
+      t--;
+    }
+  }
+}
